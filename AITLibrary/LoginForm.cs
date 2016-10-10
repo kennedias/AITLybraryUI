@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using SystemFramework;
+using System.Web.Services.Protocols;
 
 
 namespace AITLibrary
@@ -37,20 +39,16 @@ namespace AITLibrary
                 {
                     labelReturnMsg.Text = "Password is blank.";
                 }
-                else if (!loginLogic.passwordFormatValidation(textBoxPassword.Text))
+           /*     else if (!loginLogic.passwordFormatValidation(textBoxPassword.Text))
                 {
                     labelReturnMsg.Text = loginLogic.MessageOfValidation;
 
-                }
+                }*/
                 else
                 {
-                 //   UserLogic userLogic = new UserLogic();
-                  //  List<TabUserModel> tmpListUser = userLogic.PerformLogin(textBoxUserName.Text, textBoxPassword.Text);
 
                     DataTable dataTableUserLogin = userWS.UserLogin(textBoxUserName.Text, textBoxPassword.Text);
 
-
-                //    if (tmpListUser.Count > 0)
                     if (dataTableUserLogin.Rows.Count > 0)
                     {
                         //pass to Myform the informations of the user
@@ -82,7 +80,7 @@ namespace AITLibrary
                     }
                 }
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());

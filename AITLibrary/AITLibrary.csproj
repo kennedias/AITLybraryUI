@@ -155,6 +155,12 @@
     <Compile Include="ReturnBookForm.Designer.cs">
       <DependentUpon>ReturnBookForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TesteWSForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TesteWSForm.Designer.cs">
+      <DependentUpon>TesteWSForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,6 +235,9 @@
     <EmbeddedResource Include="ReturnBookForm.resx">
       <DependentUpon>ReturnBookForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TesteWSForm.resx">
+      <DependentUpon>TesteWSForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserDetailsForm.resx">
       <DependentUpon>UserDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -259,7 +268,7 @@
       <Project>{C475D6A9-4E40-4717-A53A-942145D1C054}</Project>
       <Name>BusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BusinessLogic\SystemFramework\SystemFramework.csproj">
+    <ProjectReference Include="..\SystemFramework\SystemFramework.csproj">
       <Project>{D4D7BFA7-DCB5-4D70-AEC4-9AFA2723DC4B}</Project>
       <Name>SystemFramework</Name>
     </ProjectReference>
