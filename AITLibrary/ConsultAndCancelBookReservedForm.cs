@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using BusinessLogic;
+using System.Web.Services.Protocols;
 using SystemFramework;
 
 namespace AITLibrary
@@ -30,8 +30,8 @@ namespace AITLibrary
                     int reserveId = (int) dataGridViewBookReserved.SelectedRows[0].Cells[(int)AppEnum.ViewBookReservedModel.ReserveId].Value;
                     labelSystemMessage.Text = reserveId.ToString();
 
-                    BookLogic bookLogic = new BookLogic();
-                    int resultOperation = bookLogic.DeleteBookReserved(reserveId);
+                    BookWSIntegration.BookWS bookWS = new BookWSIntegration.BookWS();
+                    int resultOperation = bookWS.DeleteBookReserved(reserveId);
                     if (resultOperation == 0)
                     {
                         labelSystemMessage.ForeColor = System.Drawing.Color.Red;
@@ -51,7 +51,7 @@ namespace AITLibrary
                     labelSystemMessage.Text = Constants.msgSelectRecord;
                 }
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());
@@ -73,8 +73,8 @@ namespace AITLibrary
         {
             try
             {
-                BookLogic bookLogic = new BookLogic();
-                dataGridViewBookReserved.DataSource = bookLogic.GetAllBooksReservedViewByUserId(staticUserID);
+                BookWSIntegration.BookWS bookWS = new BookWSIntegration.BookWS();
+                dataGridViewBookReserved.DataSource = bookWS.GetAllBooksReservedViewByUserId(staticUserID);
 
                 if (dataGridViewBookReserved.RowCount == 0)
                 {
@@ -88,7 +88,7 @@ namespace AITLibrary
                     dataGridViewBookReserved.Columns[Constants.fieldUserId].Visible = false;
                 }
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());

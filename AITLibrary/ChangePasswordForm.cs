@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using BusinessLogic;
+using System.Web.Services.Protocols;
 using SystemFramework;
 
 namespace AITLibrary
@@ -22,40 +22,32 @@ namespace AITLibrary
         {
             try
             {
-                labelReturnMsg.Text = null;
-                LoginLogic loginLogic = new LoginLogic();
+                labelReturnMsg.Text = null;                
 
                 if (textBoxNewPassword.Text == staticUserPassword)
                 {
-                    labelReturnMsg.Text = "New Password is equals to the previous.";
+                    labelReturnMsg.Text = Constants.msgPasswordEqualsToPrevious;
                 }
-                else if (textBoxNewPassword.Text == "")
+                else if (string.IsNullOrEmpty(textBoxNewPassword.Text))
                 {
-                    labelReturnMsg.Text = "New Password is blank.";
-                }
-                else if (!loginLogic.passwordFormatValidation(textBoxNewPassword.Text))
+                    labelReturnMsg.Text = Constants.msgNewPasswordBlank;
+                }                
+                else if (string.IsNullOrEmpty(textBoxConfirmPassword.Text))
                 {
-                    labelReturnMsg.Text = "New Password. " + loginLogic.MessageOfValidation;
-
-                }
-                else if (textBoxConfirmPassword.Text == "")
-                {
-                    labelReturnMsg.Text = "Confirm Password is blank.";
-                }
-                else if (!loginLogic.passwordFormatValidation(textBoxConfirmPassword.Text))
-                {
-                    labelReturnMsg.Text = "Confirm Password. " + loginLogic.MessageOfValidation;
-
-                }
+                    labelReturnMsg.Text = Constants.msgConfirmPasswordBlank;
+                }                
                 else if (textBoxNewPassword.Text != textBoxConfirmPassword.Text)
                 {
-                    labelReturnMsg.Text = "New and Confirm Password have to be equals.";
-
+                    labelReturnMsg.Text = Constants.msgNewAndConfirmPasswordNotEquals;
                 }
                 else
                 {
-                    UserLogic userLogic = new UserLogic();
-                    int resultQuery = userLogic.updateUser(staticUserName, textBoxNewPassword.Text, staticUserLevelDescription, staticUserID);
+                    LoginValidationWSIntegration.LoginValidationWS loginWS = new LoginValidationWSIntegration.LoginValidationWS();
+                    loginWS.passwordFormatValidation(textBoxNewPassword.Text);
+                    loginWS.passwordFormatValidation(textBoxConfirmPassword.Text);
+
+                    UserWSIntegration.UserWS userWS = new UserWSIntegration.UserWS();
+                    int resultQuery = userWS.updateUser(staticUserName, textBoxNewPassword.Text, staticUserLevelDescription, staticUserID);
                     if (resultQuery < 1)
                     {
                         labelReturnMsg.Text = Constants.msgErrorBusinessToUser;                        
@@ -67,13 +59,13 @@ namespace AITLibrary
                     }
                 }
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());
                 Console.WriteLine(ex.GetBaseException().ToString());
                 labelReturnMsg.ForeColor = System.Drawing.Color.Red;
-                labelReturnMsg.Text = Constants.msgErrorBusinessToUser;
+                labelReturnMsg.Text = ex.Message;
             }
             catch (Exception ex)
             {

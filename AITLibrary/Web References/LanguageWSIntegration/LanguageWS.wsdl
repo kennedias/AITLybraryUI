@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="insertLanguage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="languageName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insertLanguageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="insertLanguageResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectCountLanguageByName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="languageName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectCountLanguageByNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SelectCountLanguageByNameResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteLanguage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="languageId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteLanguageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteLanguageResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateLanguage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="languageName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="languageId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateLanguageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="updateLanguageResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllLanguages">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllLanguagesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllLanguagesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="insertLanguageSoapIn">
+    <wsdl:part name="parameters" element="tns:insertLanguage" />
+  </wsdl:message>
+  <wsdl:message name="insertLanguageSoapOut">
+    <wsdl:part name="parameters" element="tns:insertLanguageResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectCountLanguageByNameSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectCountLanguageByName" />
+  </wsdl:message>
+  <wsdl:message name="SelectCountLanguageByNameSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectCountLanguageByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteLanguageSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteLanguage" />
+  </wsdl:message>
+  <wsdl:message name="DeleteLanguageSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteLanguageResponse" />
+  </wsdl:message>
+  <wsdl:message name="updateLanguageSoapIn">
+    <wsdl:part name="parameters" element="tns:updateLanguage" />
+  </wsdl:message>
+  <wsdl:message name="updateLanguageSoapOut">
+    <wsdl:part name="parameters" element="tns:updateLanguageResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllLanguagesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllLanguages" />
+  </wsdl:message>
+  <wsdl:message name="GetAllLanguagesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllLanguagesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="LanguageWSSoap">
+    <wsdl:operation name="insertLanguage">
+      <wsdl:input message="tns:insertLanguageSoapIn" />
+      <wsdl:output message="tns:insertLanguageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectCountLanguageByName">
+      <wsdl:input message="tns:SelectCountLanguageByNameSoapIn" />
+      <wsdl:output message="tns:SelectCountLanguageByNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteLanguage">
+      <wsdl:input message="tns:DeleteLanguageSoapIn" />
+      <wsdl:output message="tns:DeleteLanguageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="updateLanguage">
+      <wsdl:input message="tns:updateLanguageSoapIn" />
+      <wsdl:output message="tns:updateLanguageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllLanguages">
+      <wsdl:input message="tns:GetAllLanguagesSoapIn" />
+      <wsdl:output message="tns:GetAllLanguagesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LanguageWSSoap" type="tns:LanguageWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="insertLanguage">
+      <soap:operation soapAction="http://tempuri.org/insertLanguage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectCountLanguageByName">
+      <soap:operation soapAction="http://tempuri.org/SelectCountLanguageByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteLanguage">
+      <soap:operation soapAction="http://tempuri.org/DeleteLanguage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateLanguage">
+      <soap:operation soapAction="http://tempuri.org/updateLanguage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllLanguages">
+      <soap:operation soapAction="http://tempuri.org/GetAllLanguages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LanguageWSSoap12" type="tns:LanguageWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="insertLanguage">
+      <soap12:operation soapAction="http://tempuri.org/insertLanguage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectCountLanguageByName">
+      <soap12:operation soapAction="http://tempuri.org/SelectCountLanguageByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteLanguage">
+      <soap12:operation soapAction="http://tempuri.org/DeleteLanguage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateLanguage">
+      <soap12:operation soapAction="http://tempuri.org/updateLanguage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllLanguages">
+      <soap12:operation soapAction="http://tempuri.org/GetAllLanguages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LanguageWS">
+    <wsdl:port name="LanguageWSSoap" binding="tns:LanguageWSSoap">
+      <soap:address location="http://localhost/LanguageWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LanguageWSSoap12" binding="tns:LanguageWSSoap12">
+      <soap12:address location="http://localhost/LanguageWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using BusinessLogic;
+using System.Web.Services.Protocols;
 using SystemFramework;
 
 namespace AITLibrary
@@ -23,8 +23,8 @@ namespace AITLibrary
             try
             {
                 labelSystemMessage.Text = null;
-                BookLogic bookLogic = new BookLogic();
-                dataGridViewListBooks.DataSource = bookLogic.GetAllBooksAvailableByBookNameAndAuthor(textBoxBookName.Text, textBoxAuthor.Text);
+                BookWSIntegration.BookWS bookWS = new BookWSIntegration.BookWS();
+                dataGridViewListBooks.DataSource = bookWS.GetAllBooksAvailableByBookNameAndAuthor(textBoxBookName.Text, textBoxAuthor.Text);
 
                 if (dataGridViewListBooks.RowCount == 0)
                 {
@@ -32,7 +32,7 @@ namespace AITLibrary
                     labelSystemMessage.Text = Constants.msgNoMatchesFound;
                 }
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());
@@ -58,10 +58,10 @@ namespace AITLibrary
                 textBoxBookName.Text = null;
                 textBoxAuthor.Text = null;
                 dataGridViewListBooks.DataSource = null;
-                BookLogic bookLogic = new BookLogic();
-                dataGridViewListBooks.DataSource = bookLogic.GetAllAvailableBooks();
+                BookWSIntegration.BookWS bookWS = new BookWSIntegration.BookWS();
+                dataGridViewListBooks.DataSource = bookWS.GetAllAvailableBooks();
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());
@@ -95,8 +95,8 @@ namespace AITLibrary
                     String isbn = dataGridViewListBooks.SelectedRows[0].Cells[(int)AppEnum.ViewBookModel.Isbn].Value.ToString();
                     int userId = (int) dataGridViewUser.SelectedRows[0].Cells[(int)AppEnum.TabUserModel.ID].Value;
 
-                    BookLogic bookLogic = new BookLogic();
-                    int resultOperation = bookLogic.InsertBorrowBook(userId, isbn);
+                    BookWSIntegration.BookWS bookWS = new BookWSIntegration.BookWS();
+                    int resultOperation = bookWS.InsertBorrowBook(userId, isbn);
 
                     if (resultOperation == 0)
                     {
@@ -117,7 +117,7 @@ namespace AITLibrary
                     labelSystemMessage.Text = Constants.msgSelectRecord;
                 }
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());
@@ -147,9 +147,9 @@ namespace AITLibrary
                 }
                 else
                 {
-                    UserLogic userLogic = new UserLogic();
+                    UserWSIntegration.UserWS userWS = new UserWSIntegration.UserWS();
 
-                    dataGridViewUser.DataSource = userLogic.GetUsersByName(textBoxUserName.Text);
+                    dataGridViewUser.DataSource = userWS.GetUsersByName(textBoxUserName.Text);
                     dataGridViewUser.Columns[Constants.fieldID].Visible = false;
                     dataGridViewUser.Columns[Constants.fieldLevelCode].Visible = false;
                     dataGridViewUser.Columns[Constants.fieldLevelDescription].Visible = false;
@@ -163,7 +163,7 @@ namespace AITLibrary
                 }
 
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());

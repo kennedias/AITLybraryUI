@@ -14,7 +14,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using BusinessLogic;
+using System.Web.Services.Protocols;
 using SystemFramework;
 
 namespace AITLibrary
@@ -33,12 +33,12 @@ namespace AITLibrary
         {
             try
             {
-                UserLogic userLogic = new UserLogic();
-                dataGridViewListUsers.DataSource = userLogic.GetAllUser();
+                UserWSIntegration.UserWS userWS = new UserWSIntegration.UserWS();
+                dataGridViewListUsers.DataSource = userWS.GetAllUser();
                 dataGridViewListUsers.Columns[Constants.fieldID].Visible = false;
                 dataGridViewListUsers.Columns[Constants.fieldLevelCode].Visible = false;
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());

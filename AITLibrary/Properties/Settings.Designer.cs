@@ -32,5 +32,55 @@ namespace AITLibrary.Properties {
                 return ((string)(this["AITLibrary_UserWS_UserWS"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/AuthorWS.asmx")]
+        public string AITLibrary_AuthorWS_AuthorWS {
+            get {
+                return ((string)(this["AITLibrary_AuthorWS_AuthorWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/BookWS.asmx")]
+        public string AITLibrary_BookWS_BookWS {
+            get {
+                return ((string)(this["AITLibrary_BookWS_BookWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/CategoryWS.asmx")]
+        public string AITLibrary_CategoryWS_CategoryWS {
+            get {
+                return ((string)(this["AITLibrary_CategoryWS_CategoryWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/LoginValidationWS.asmx")]
+        public string AITLibrary_LoginValidationWS_LoginValidationWS {
+            get {
+                return ((string)(this["AITLibrary_LoginValidationWS_LoginValidationWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/LanguageWS.asmx")]
+        public string AITLibrary_LanguageWS_LanguageWS {
+            get {
+                return ((string)(this["AITLibrary_LanguageWS_LanguageWS"]));
+            }
+        }
     }
 }

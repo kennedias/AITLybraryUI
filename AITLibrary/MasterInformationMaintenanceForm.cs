@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using BusinessLogic;
+using System.Web.Services.Protocols;
 using SystemFramework;
 
 namespace AITLibrary
@@ -30,25 +30,27 @@ namespace AITLibrary
                 textBoxName.Text = null;
 
                 dataGridViewMasterInformation.DataSource = null;
-                MasterLogic masterLogic = new MasterLogic();
 
                 switch (comboBoxMasterInformation.SelectedItem.ToString())
                 {
                     case "Author":
-                        dataGridViewMasterInformation.DataSource = masterLogic.GetAllAuthors();
+                        AuthorWSIntegration.AuthorWS authorWS = new AuthorWSIntegration.AuthorWS();
+                        dataGridViewMasterInformation.DataSource = authorWS.GetAllAuthors();
                         break;
                     case "Category":
-                        dataGridViewMasterInformation.DataSource = masterLogic.GetAllCategories();
+                        CategoryWSIntegration.CategoryWS categoryWS = new CategoryWSIntegration.CategoryWS();
+                        dataGridViewMasterInformation.DataSource = categoryWS.GetAllCategories();
                         break;
                     case "Language":
-                        dataGridViewMasterInformation.DataSource = masterLogic.GetAllLanguages();
+                        LanguageWSIntegration.LanguageWS languageWS = new LanguageWSIntegration.LanguageWS();
+                        dataGridViewMasterInformation.DataSource = languageWS.GetAllLanguages();
                         break;
                 }
 
                 dataGridViewMasterInformation.Columns[Constants.fieldID].Visible = false;
 
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());
@@ -116,17 +118,19 @@ namespace AITLibrary
                     else
                     {
                         int resultOperation = 0;
-                        MasterLogic masterLogic = new MasterLogic();
                         switch (comboBoxMasterInformation.SelectedItem.ToString())
                         {
-                            case "Author":                              
-                                resultOperation = masterLogic.insertAuthor(textBoxName.Text);
+                            case "Author":
+                                AuthorWSIntegration.AuthorWS authorWS = new AuthorWSIntegration.AuthorWS();
+                                resultOperation = authorWS.insertAuthor(textBoxName.Text);
                                 break;
                             case "Category":
-                                resultOperation = masterLogic.insertCategory(textBoxName.Text);
+                                CategoryWSIntegration.CategoryWS categoryWS = new CategoryWSIntegration.CategoryWS();
+                                resultOperation = categoryWS.insertCategory(textBoxName.Text);
                                 break;
                             case "Language":
-                                resultOperation = masterLogic.insertLanguage(textBoxName.Text);
+                                LanguageWSIntegration.LanguageWS languageWS = new LanguageWSIntegration.LanguageWS();
+                                resultOperation = languageWS.insertLanguage(textBoxName.Text);
                                 break;
                         }
 
@@ -153,20 +157,22 @@ namespace AITLibrary
                     else
                     {
                         int resultOperation = 0;
-                        MasterLogic masterLogic = new MasterLogic();
                         int iDColumnIndex = (int)AppEnum.TabMasterModel.ID;
                         int informationID = (int)dataGridViewMasterInformation.SelectedRows[0].Cells[iDColumnIndex].Value;
 
                         switch (comboBoxMasterInformation.SelectedItem.ToString())
                         {
                             case "Author":
-                                resultOperation = masterLogic.updateAuthor(textBoxName.Text, informationID);
+                                AuthorWSIntegration.AuthorWS authorWS = new AuthorWSIntegration.AuthorWS();
+                                resultOperation = authorWS.updateAuthor(textBoxName.Text, informationID);
                                 break;
                             case "Category":
-                                resultOperation = masterLogic.updateCategory(textBoxName.Text, informationID);
+                                CategoryWSIntegration.CategoryWS categoryWS = new CategoryWSIntegration.CategoryWS();
+                                resultOperation = categoryWS.updateCategory(textBoxName.Text, informationID);
                                 break;
                             case "Language":
-                                resultOperation = masterLogic.updateLanguage(textBoxName.Text, informationID);
+                                LanguageWSIntegration.LanguageWS languageWS = new LanguageWSIntegration.LanguageWS();
+                                resultOperation = languageWS.updateLanguage(textBoxName.Text, informationID);
                                 break;
                         }
 
@@ -195,20 +201,22 @@ namespace AITLibrary
                     else
                     {
                         int resultOperation = 0;
-                        MasterLogic masterLogic = new MasterLogic();
                         int iDColumnIndex = (int)AppEnum.TabMasterModel.ID;
                         int informationID = (int)dataGridViewMasterInformation.SelectedRows[0].Cells[iDColumnIndex].Value;
 
                         switch (comboBoxMasterInformation.SelectedItem.ToString())
                         {
                             case "Author":
-                                resultOperation = masterLogic.DeleteAuthor(informationID);
+                                AuthorWSIntegration.AuthorWS authorWS = new AuthorWSIntegration.AuthorWS();
+                                resultOperation = authorWS.DeleteAuthor(informationID);
                                 break;
                             case "Category":
-                                resultOperation = masterLogic.DeleteCategory(informationID);
+                                CategoryWSIntegration.CategoryWS categoryWS = new CategoryWSIntegration.CategoryWS();
+                                resultOperation = categoryWS.DeleteCategory(informationID);
                                 break;
                             case "Language":
-                                resultOperation = masterLogic.DeleteLanguage(informationID);
+                                LanguageWSIntegration.LanguageWS languageWS = new LanguageWSIntegration.LanguageWS();
+                                resultOperation = languageWS.DeleteLanguage(informationID);
                                 break;
                         }
 
@@ -230,7 +238,7 @@ namespace AITLibrary
                     labelSystemMessage.Text = Constants.msgSelectRecord;
                 }
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());
@@ -260,25 +268,27 @@ namespace AITLibrary
                 textBoxName.Text = null;
 
                 dataGridViewMasterInformation.DataSource = null;
-                MasterLogic masterLogic = new MasterLogic();
 
                 switch (comboBoxMasterInformation.SelectedItem.ToString())
                 {
                     case "Author":
-                        dataGridViewMasterInformation.DataSource = masterLogic.GetAllAuthors();
+                        AuthorWSIntegration.AuthorWS authorWS = new AuthorWSIntegration.AuthorWS();
+                        dataGridViewMasterInformation.DataSource = authorWS.GetAllAuthors();
                         break;
                     case "Category":
-                        dataGridViewMasterInformation.DataSource = masterLogic.GetAllCategories();
+                        CategoryWSIntegration.CategoryWS categoryWS = new CategoryWSIntegration.CategoryWS();
+                        dataGridViewMasterInformation.DataSource = categoryWS.GetAllCategories();
                         break;
                     case "Language":
-                        dataGridViewMasterInformation.DataSource = masterLogic.GetAllLanguages();
+                        LanguageWSIntegration.LanguageWS languageWS = new LanguageWSIntegration.LanguageWS();
+                        dataGridViewMasterInformation.DataSource = languageWS.GetAllLanguages();
                         break;
                 }
 
                 dataGridViewMasterInformation.Columns[Constants.fieldID].Visible = false;
 
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());

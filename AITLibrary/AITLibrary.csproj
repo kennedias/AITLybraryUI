@@ -155,12 +155,6 @@
     <Compile Include="ReturnBookForm.Designer.cs">
       <DependentUpon>ReturnBookForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TesteWSForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TesteWSForm.Designer.cs">
-      <DependentUpon>TesteWSForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +172,31 @@
     </Compile>
     <Compile Include="UserMaintenanceForm.Designer.cs">
       <DependentUpon>UserMaintenanceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\AuthorWSIntegration\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\BookWSIntegration\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\CategoryWSIntegration\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\LanguageWSIntegration\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\LoginValidationWSIntegration\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\UserWSIntegration\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -235,9 +254,6 @@
     <EmbeddedResource Include="ReturnBookForm.resx">
       <DependentUpon>ReturnBookForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TesteWSForm.resx">
-      <DependentUpon>TesteWSForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UserDetailsForm.resx">
       <DependentUpon>UserDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -257,6 +273,31 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Web References\AuthorWSIntegration\AuthorWS.wsdl" />
+    <None Include="Web References\AuthorWSIntegration\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\BookWSIntegration\BookWS.wsdl" />
+    <None Include="Web References\BookWSIntegration\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\CategoryWSIntegration\CategoryWS.wsdl" />
+    <None Include="Web References\CategoryWSIntegration\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\LanguageWSIntegration\LanguageWS.wsdl" />
+    <None Include="Web References\LanguageWSIntegration\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\LoginValidationWSIntegration\LoginValidationWS.wsdl" />
+    <None Include="Web References\LoginValidationWSIntegration\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\UserWSIntegration\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -264,17 +305,9 @@
     <None Include="Web References\UserWSIntegration\UserWS.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLogic\BusinessLogic\BusinessLogic.csproj">
-      <Project>{C475D6A9-4E40-4717-A53A-942145D1C054}</Project>
-      <Name>BusinessLogic</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SystemFramework\SystemFramework.csproj">
       <Project>{D4D7BFA7-DCB5-4D70-AEC4-9AFA2723DC4B}</Project>
       <Name>SystemFramework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer\DataAccessLayer.csproj">
-      <Project>{69F68408-A351-4007-B373-065563411E52}</Project>
-      <Name>DataAccessLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -306,6 +339,61 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="http://localhost/AuthorWS.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\AuthorWSIntegration\</RelPath>
+      <UpdateFromURL>http://localhost/AuthorWS.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>AITLibrary_AuthorWS_AuthorWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/BookWS.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\BookWSIntegration\</RelPath>
+      <UpdateFromURL>http://localhost/BookWS.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>AITLibrary_BookWS_BookWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/CategoryWS.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\CategoryWSIntegration\</RelPath>
+      <UpdateFromURL>http://localhost/CategoryWS.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>AITLibrary_CategoryWS_CategoryWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/LanguageWS.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\LanguageWSIntegration\</RelPath>
+      <UpdateFromURL>http://localhost/LanguageWS.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>AITLibrary_LanguageWS_LanguageWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/LoginValidationWS.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\LoginValidationWSIntegration\</RelPath>
+      <UpdateFromURL>http://localhost/LoginValidationWS.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>AITLibrary_LoginValidationWS_LoginValidationWS</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://localhost/UserWS.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\UserWSIntegration\</RelPath>
@@ -320,6 +408,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Web References\UserWSIntegration\UserWS.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\AuthorWSIntegration\AuthorWS.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\BookWSIntegration\BookWS.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\CategoryWSIntegration\CategoryWS.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\LoginValidationWSIntegration\LoginValidationWS.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\LanguageWSIntegration\LanguageWS.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

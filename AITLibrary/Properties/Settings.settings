@@ -5,5 +5,20 @@
     <Setting Name="AITLibrary_UserWS_UserWS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://localhost/UserWS.asmx</Value>
     </Setting>
+    <Setting Name="AITLibrary_AuthorWS_AuthorWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/AuthorWS.asmx</Value>
+    </Setting>
+    <Setting Name="AITLibrary_BookWS_BookWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/BookWS.asmx</Value>
+    </Setting>
+    <Setting Name="AITLibrary_CategoryWS_CategoryWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/CategoryWS.asmx</Value>
+    </Setting>
+    <Setting Name="AITLibrary_LoginValidationWS_LoginValidationWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/LoginValidationWS.asmx</Value>
+    </Setting>
+    <Setting Name="AITLibrary_LanguageWS_LanguageWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/LanguageWS.asmx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

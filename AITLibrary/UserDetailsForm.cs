@@ -14,7 +14,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using BusinessLogic;
+using System.Web.Services.Protocols;
 using SystemFramework;
 
 namespace AITLibrary
@@ -100,8 +100,8 @@ namespace AITLibrary
                 }
                 else
                 {
-                    UserLogic userLogic = new UserLogic();
-                    int returnOperation = userLogic.updateUser(textBoxUserName.Text, staticUserPassword, comboBoxUserLevel.Text, staticUserID);
+                    UserWSIntegration.UserWS userWS = new UserWSIntegration.UserWS();
+                    int returnOperation = userWS.updateUser(textBoxUserName.Text, staticUserPassword, comboBoxUserLevel.Text, staticUserID);
                     if (returnOperation < 1)
                     {
                         labelSystemMessage.Text = Constants.msgNoRecordUpdated;
@@ -113,7 +113,7 @@ namespace AITLibrary
                     }
                 }
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());

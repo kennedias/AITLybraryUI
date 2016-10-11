@@ -30,11 +30,23 @@ namespace AITLibrary.UserWSIntegration {
     [System.Web.Services.WebServiceBindingAttribute(Name="UserWSSoap", Namespace="http://tempuri.org/")]
     public partial class UserWS : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
+        private System.Threading.SendOrPostCallback GetAllUserOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetUsersByNameOperationCompleted;
+        
         private System.Threading.SendOrPostCallback UserLoginOperationCompleted;
         
-        private System.Threading.SendOrPostCallback UserListOperationCompleted;
+        private System.Threading.SendOrPostCallback updateUserOperationCompleted;
         
         private System.Threading.SendOrPostCallback InsertUserOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback updateUserWithoutPasswordOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback deleteUserOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getUserLevelDescriptionByLevelCodeOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getUserLevelCodeByLevelDescriptionOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -75,13 +87,87 @@ namespace AITLibrary.UserWSIntegration {
         }
         
         /// <remarks/>
+        public event GetAllUserCompletedEventHandler GetAllUserCompleted;
+        
+        /// <remarks/>
+        public event GetUsersByNameCompletedEventHandler GetUsersByNameCompleted;
+        
+        /// <remarks/>
         public event UserLoginCompletedEventHandler UserLoginCompleted;
         
         /// <remarks/>
-        public event UserListCompletedEventHandler UserListCompleted;
+        public event updateUserCompletedEventHandler updateUserCompleted;
         
         /// <remarks/>
         public event InsertUserCompletedEventHandler InsertUserCompleted;
+        
+        /// <remarks/>
+        public event updateUserWithoutPasswordCompletedEventHandler updateUserWithoutPasswordCompleted;
+        
+        /// <remarks/>
+        public event deleteUserCompletedEventHandler deleteUserCompleted;
+        
+        /// <remarks/>
+        public event getUserLevelDescriptionByLevelCodeCompletedEventHandler getUserLevelDescriptionByLevelCodeCompleted;
+        
+        /// <remarks/>
+        public event getUserLevelCodeByLevelDescriptionCompletedEventHandler getUserLevelCodeByLevelDescriptionCompleted;
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAllUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetAllUser() {
+            object[] results = this.Invoke("GetAllUser", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAllUserAsync() {
+            this.GetAllUserAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetAllUserAsync(object userState) {
+            if ((this.GetAllUserOperationCompleted == null)) {
+                this.GetAllUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllUserOperationCompleted);
+            }
+            this.InvokeAsync("GetAllUser", new object[0], this.GetAllUserOperationCompleted, userState);
+        }
+        
+        private void OnGetAllUserOperationCompleted(object arg) {
+            if ((this.GetAllUserCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAllUserCompleted(this, new GetAllUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetUsersByName", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetUsersByName(string userName) {
+            object[] results = this.Invoke("GetUsersByName", new object[] {
+                        userName});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetUsersByNameAsync(string userName) {
+            this.GetUsersByNameAsync(userName, null);
+        }
+        
+        /// <remarks/>
+        public void GetUsersByNameAsync(string userName, object userState) {
+            if ((this.GetUsersByNameOperationCompleted == null)) {
+                this.GetUsersByNameOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetUsersByNameOperationCompleted);
+            }
+            this.InvokeAsync("GetUsersByName", new object[] {
+                        userName}, this.GetUsersByNameOperationCompleted, userState);
+        }
+        
+        private void OnGetUsersByNameOperationCompleted(object arg) {
+            if ((this.GetUsersByNameCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetUsersByNameCompleted(this, new GetUsersByNameCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/UserLogin", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -115,29 +201,37 @@ namespace AITLibrary.UserWSIntegration {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/UserList", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataTable UserList() {
-            object[] results = this.Invoke("UserList", new object[0]);
-            return ((System.Data.DataTable)(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/updateUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int updateUser(string userName, string password, string userLevelDescription, int userID) {
+            object[] results = this.Invoke("updateUser", new object[] {
+                        userName,
+                        password,
+                        userLevelDescription,
+                        userID});
+            return ((int)(results[0]));
         }
         
         /// <remarks/>
-        public void UserListAsync() {
-            this.UserListAsync(null);
+        public void updateUserAsync(string userName, string password, string userLevelDescription, int userID) {
+            this.updateUserAsync(userName, password, userLevelDescription, userID, null);
         }
         
         /// <remarks/>
-        public void UserListAsync(object userState) {
-            if ((this.UserListOperationCompleted == null)) {
-                this.UserListOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUserListOperationCompleted);
+        public void updateUserAsync(string userName, string password, string userLevelDescription, int userID, object userState) {
+            if ((this.updateUserOperationCompleted == null)) {
+                this.updateUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdateUserOperationCompleted);
             }
-            this.InvokeAsync("UserList", new object[0], this.UserListOperationCompleted, userState);
+            this.InvokeAsync("updateUser", new object[] {
+                        userName,
+                        password,
+                        userLevelDescription,
+                        userID}, this.updateUserOperationCompleted, userState);
         }
         
-        private void OnUserListOperationCompleted(object arg) {
-            if ((this.UserListCompleted != null)) {
+        private void OnupdateUserOperationCompleted(object arg) {
+            if ((this.updateUserCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.UserListCompleted(this, new UserListCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.updateUserCompleted(this, new updateUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -173,6 +267,126 @@ namespace AITLibrary.UserWSIntegration {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/updateUserWithoutPassword", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int updateUserWithoutPassword(string userName, string userLevelDescription, int userID) {
+            object[] results = this.Invoke("updateUserWithoutPassword", new object[] {
+                        userName,
+                        userLevelDescription,
+                        userID});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void updateUserWithoutPasswordAsync(string userName, string userLevelDescription, int userID) {
+            this.updateUserWithoutPasswordAsync(userName, userLevelDescription, userID, null);
+        }
+        
+        /// <remarks/>
+        public void updateUserWithoutPasswordAsync(string userName, string userLevelDescription, int userID, object userState) {
+            if ((this.updateUserWithoutPasswordOperationCompleted == null)) {
+                this.updateUserWithoutPasswordOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdateUserWithoutPasswordOperationCompleted);
+            }
+            this.InvokeAsync("updateUserWithoutPassword", new object[] {
+                        userName,
+                        userLevelDescription,
+                        userID}, this.updateUserWithoutPasswordOperationCompleted, userState);
+        }
+        
+        private void OnupdateUserWithoutPasswordOperationCompleted(object arg) {
+            if ((this.updateUserWithoutPasswordCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.updateUserWithoutPasswordCompleted(this, new updateUserWithoutPasswordCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/deleteUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int deleteUser(int userID) {
+            object[] results = this.Invoke("deleteUser", new object[] {
+                        userID});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void deleteUserAsync(int userID) {
+            this.deleteUserAsync(userID, null);
+        }
+        
+        /// <remarks/>
+        public void deleteUserAsync(int userID, object userState) {
+            if ((this.deleteUserOperationCompleted == null)) {
+                this.deleteUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OndeleteUserOperationCompleted);
+            }
+            this.InvokeAsync("deleteUser", new object[] {
+                        userID}, this.deleteUserOperationCompleted, userState);
+        }
+        
+        private void OndeleteUserOperationCompleted(object arg) {
+            if ((this.deleteUserCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.deleteUserCompleted(this, new deleteUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/getUserLevelDescriptionByLevelCode", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string getUserLevelDescriptionByLevelCode(int userLevelCode) {
+            object[] results = this.Invoke("getUserLevelDescriptionByLevelCode", new object[] {
+                        userLevelCode});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getUserLevelDescriptionByLevelCodeAsync(int userLevelCode) {
+            this.getUserLevelDescriptionByLevelCodeAsync(userLevelCode, null);
+        }
+        
+        /// <remarks/>
+        public void getUserLevelDescriptionByLevelCodeAsync(int userLevelCode, object userState) {
+            if ((this.getUserLevelDescriptionByLevelCodeOperationCompleted == null)) {
+                this.getUserLevelDescriptionByLevelCodeOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetUserLevelDescriptionByLevelCodeOperationCompleted);
+            }
+            this.InvokeAsync("getUserLevelDescriptionByLevelCode", new object[] {
+                        userLevelCode}, this.getUserLevelDescriptionByLevelCodeOperationCompleted, userState);
+        }
+        
+        private void OngetUserLevelDescriptionByLevelCodeOperationCompleted(object arg) {
+            if ((this.getUserLevelDescriptionByLevelCodeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getUserLevelDescriptionByLevelCodeCompleted(this, new getUserLevelDescriptionByLevelCodeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/getUserLevelCodeByLevelDescription", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int getUserLevelCodeByLevelDescription(string userLevelDescription) {
+            object[] results = this.Invoke("getUserLevelCodeByLevelDescription", new object[] {
+                        userLevelDescription});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getUserLevelCodeByLevelDescriptionAsync(string userLevelDescription) {
+            this.getUserLevelCodeByLevelDescriptionAsync(userLevelDescription, null);
+        }
+        
+        /// <remarks/>
+        public void getUserLevelCodeByLevelDescriptionAsync(string userLevelDescription, object userState) {
+            if ((this.getUserLevelCodeByLevelDescriptionOperationCompleted == null)) {
+                this.getUserLevelCodeByLevelDescriptionOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetUserLevelCodeByLevelDescriptionOperationCompleted);
+            }
+            this.InvokeAsync("getUserLevelCodeByLevelDescription", new object[] {
+                        userLevelDescription}, this.getUserLevelCodeByLevelDescriptionOperationCompleted, userState);
+        }
+        
+        private void OngetUserLevelCodeByLevelDescriptionOperationCompleted(object arg) {
+            if ((this.getUserLevelCodeByLevelDescriptionCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getUserLevelCodeByLevelDescriptionCompleted(this, new getUserLevelCodeByLevelDescriptionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -188,6 +402,58 @@ namespace AITLibrary.UserWSIntegration {
                 return true;
             }
             return false;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void GetAllUserCompletedEventHandler(object sender, GetAllUserCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAllUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAllUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void GetUsersByNameCompletedEventHandler(object sender, GetUsersByNameCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetUsersByNameCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetUsersByNameCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
         }
     }
     
@@ -219,26 +485,26 @@ namespace AITLibrary.UserWSIntegration {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
-    public delegate void UserListCompletedEventHandler(object sender, UserListCompletedEventArgs e);
+    public delegate void updateUserCompletedEventHandler(object sender, updateUserCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class UserListCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class updateUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal UserListCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal updateUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public System.Data.DataTable Result {
+        public int Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataTable)(this.results[0]));
+                return ((int)(this.results[0]));
             }
         }
     }
@@ -256,6 +522,110 @@ namespace AITLibrary.UserWSIntegration {
         private object[] results;
         
         internal InsertUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void updateUserWithoutPasswordCompletedEventHandler(object sender, updateUserWithoutPasswordCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class updateUserWithoutPasswordCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal updateUserWithoutPasswordCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void deleteUserCompletedEventHandler(object sender, deleteUserCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class deleteUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal deleteUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void getUserLevelDescriptionByLevelCodeCompletedEventHandler(object sender, getUserLevelDescriptionByLevelCodeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getUserLevelDescriptionByLevelCodeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getUserLevelDescriptionByLevelCodeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void getUserLevelCodeByLevelDescriptionCompletedEventHandler(object sender, getUserLevelCodeByLevelDescriptionCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getUserLevelCodeByLevelDescriptionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getUserLevelCodeByLevelDescriptionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

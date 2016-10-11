@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using SystemFramework;
 using System.Web.Services.Protocols;
 
-
 namespace AITLibrary
 {
     public partial class LoginForm : LybraryPrincipalForm
@@ -25,42 +24,41 @@ namespace AITLibrary
             {
                 labelReturnMsg.Text = null;
 
-                UserWSIntegration.UserWS userWS = new UserWSIntegration.UserWS();
-
-                if ((textBoxUserName.Text == "") && (textBoxPassword.Text == ""))
+                if ((string.IsNullOrEmpty(textBoxUserName.Text)) && (string.IsNullOrEmpty(textBoxPassword.Text)))
                 {
-                    labelReturnMsg.Text = "User name and password are blank.";
+                    labelReturnMsg.Text = Constants.msgNamePasswordBlank;
                 }
-                else if (textBoxUserName.Text == "")
+                else if (string.IsNullOrEmpty(textBoxUserName.Text))
                 {
-                    labelReturnMsg.Text = "User name is blank.";
+                    labelReturnMsg.Text = Constants.msgUserNameBlank;  
                 }
-                else if (textBoxPassword.Text == "")
+                else if (string.IsNullOrEmpty(textBoxPassword.Text))
                 {
-                    labelReturnMsg.Text = "Password is blank.";
+                    labelReturnMsg.Text = Constants.msgPasswordBlank;
                 }
-           /*     else if (!loginLogic.passwordFormatValidation(textBoxPassword.Text))
-                {
-                    labelReturnMsg.Text = loginLogic.MessageOfValidation;
+                else 
+                {                   
+                    LoginValidationWSIntegration.LoginValidationWS loginWS = new LoginValidationWSIntegration.LoginValidationWS();
+                    loginWS.passwordFormatValidation(textBoxPassword.Text);
 
-                }*/
-                else
-                {
-
-                    DataTable dataTableUserLogin = userWS.UserLogin(textBoxUserName.Text, textBoxPassword.Text);
-
-                    if (dataTableUserLogin.Rows.Count > 0)
+                    UserWSIntegration.UserWS userWS = new UserWSIntegration.UserWS();
+                    DataTable dataTableUserLogin = userWS.UserLogin(textBoxUserName.Text, textBoxPassword.Text);                                   
+                    
+                    if (dataTableUserLogin.Rows.Count == 0)
+                    {
+                        labelReturnMsg.Text = Constants.msgNoMatchesFound; 
+                    } 
+                    else 
                     {
                         //pass to Myform the informations of the user
-                        staticUserID = Convert.ToInt32(dataTableUserLogin.Rows[0]["ID"]);
-                        staticUserName = dataTableUserLogin.Rows[0]["Name"].ToString();
-                        staticUserLevelCode = Convert.ToInt32(dataTableUserLogin.Rows[0]["LevelCode"]);
-                        staticUserLevelDescription = dataTableUserLogin.Rows[0]["LevelDescription"].ToString();
+                        staticUserID = Convert.ToInt32(dataTableUserLogin.Rows[0][Constants.fieldID]);
+                        staticUserName = dataTableUserLogin.Rows[0][Constants.fieldName].ToString();
+                        staticUserLevelCode = Convert.ToInt32(dataTableUserLogin.Rows[0][Constants.fieldLevelCode]);
+                        staticUserLevelDescription = dataTableUserLogin.Rows[0][Constants.fieldLevelDescription].ToString();
                         staticUserPassword = textBoxPassword.Text;
 
-                        if (staticUserLevelCode == Constants.userCode) //TODO Constants.userCode)
+                        if (staticUserLevelCode == Constants.userCode) 
                         {
-
                             System.Threading.Thread threadChangePasswordForm = new System.Threading.Thread(new System.Threading.ThreadStart(OpenChangePasswordForm));
                             threadChangePasswordForm.Start();
                             System.Threading.Thread threadLybraryBaseForm = new System.Threading.Thread(new System.Threading.ThreadStart(OpenLybraryTemplateForm));
@@ -74,10 +72,6 @@ namespace AITLibrary
                             this.Close();
                         }
                     }
-                    else
-                    {
-                        labelReturnMsg.Text = "User not found or password invalid.";
-                    }
                 }
             }
             catch (SoapException ex)
@@ -86,7 +80,7 @@ namespace AITLibrary
                 Console.WriteLine(ex.ToString());
                 Console.WriteLine(ex.GetBaseException().ToString());
                 labelReturnMsg.ForeColor = System.Drawing.Color.Red;
-                labelReturnMsg.Text = "This action can not be completed! Please contact the system support team.";
+                labelReturnMsg.Text = ex.Message;
             }
             catch (Exception ex)
             {
@@ -94,7 +88,7 @@ namespace AITLibrary
                 Console.WriteLine(ex.ToString());
                 Console.WriteLine(ex.GetBaseException().ToString());
                 labelReturnMsg.ForeColor = System.Drawing.Color.Red;
-                labelReturnMsg.Text = "Sorry, something went wrong! Please contact the system support team.";
+                labelReturnMsg.Text = Constants.msgErrorSystemToUser;
             }
 
         }
@@ -111,7 +105,7 @@ namespace AITLibrary
                 Console.WriteLine(ex.ToString());
                 Console.WriteLine(ex.GetBaseException().ToString());
                 labelReturnMsg.ForeColor = System.Drawing.Color.Red;
-                labelReturnMsg.Text = "Sorry, something went wrong! Please contact the system support team.";
+                labelReturnMsg.Text = Constants.msgErrorSystemToUser;
             }
         }
 
@@ -127,7 +121,7 @@ namespace AITLibrary
                 Console.WriteLine(ex.ToString());
                 Console.WriteLine(ex.GetBaseException().ToString());
                 labelReturnMsg.ForeColor = System.Drawing.Color.Red;
-                labelReturnMsg.Text = "Sorry, something went wrong! Please contact the system support team.";
+                labelReturnMsg.Text = Constants.msgErrorSystemToUser;
             }
         }
 

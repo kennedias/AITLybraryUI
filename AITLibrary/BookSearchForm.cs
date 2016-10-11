@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using BusinessLogic;
+using System.Web.Services.Protocols;
 using SystemFramework;
 
 namespace AITLibrary
@@ -27,10 +27,10 @@ namespace AITLibrary
                 textBoxBookName.Text = null;
                 textBoxAuthor.Text = null;
                 dataGridViewListBooks.DataSource = null;
-                BookLogic bookLogic = new BookLogic();
-                dataGridViewListBooks.DataSource = bookLogic.GetAllBooksView();
+                BookWSIntegration.BookWS bookWS = new BookWSIntegration.BookWS();
+                dataGridViewListBooks.DataSource = bookWS.GetAllBooksView();
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());
@@ -62,17 +62,17 @@ namespace AITLibrary
                 else
                 {
                     labelMessageForUser.Text = null;
-                    BookLogic bookLogic = new BookLogic();
-                    dataGridViewListBooks.DataSource = bookLogic.BookSearch(textBoxISBN.Text, textBoxBookName.Text, textBoxAuthor.Text);
+                    BookWSIntegration.BookWS bookWS = new BookWSIntegration.BookWS();
+                    dataGridViewListBooks.DataSource = bookWS.BookSearch(textBoxISBN.Text, textBoxBookName.Text, textBoxAuthor.Text);
 
                     if (dataGridViewListBooks.RowCount == 0)
                     {
                         labelMessageForUser.ForeColor = System.Drawing.Color.Red;
-                        labelMessageForUser.Text = "No matches found.";
+                        labelMessageForUser.Text = Constants.msgNoMatchesFound;
                     }
                 }
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());

@@ -6,8 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using BusinessLogic;
 using SystemFramework;
+using System.Web.Services.Protocols;
 
 namespace AITLibrary
 {
@@ -23,10 +23,11 @@ namespace AITLibrary
             try
             {
                 dataGridViewBookBrowse.DataSource = null;
-                BookLogic bookLogic = new BookLogic();
-                dataGridViewBookBrowse.DataSource = bookLogic.GetAllBooksView();
+                BookWSIntegration.BookWS bookWS = new BookWSIntegration.BookWS();
+
+                 dataGridViewBookBrowse.DataSource = bookWS.GetAllBooksView();
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());

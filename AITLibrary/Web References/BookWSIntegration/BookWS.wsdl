@@ -1,0 +1,994 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetAllBooksView">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllBooksViewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllBooksViewResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BookSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bookISBN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="bookName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="author" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BookSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BookSearchResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insertBookReserved">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="isbn" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="reservedDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insertBookReservedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="insertBookReservedResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTotalBookReservedByIsbn">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="isbn" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTotalBookReservedByIsbnResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetTotalBookReservedByIsbnResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteBookReserved">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="reservedId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteBookReservedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteBookReservedResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllReservedBooksByUserId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllReservedBooksByUserIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllReservedBooksByUserIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllAvailableBooks">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllAvailableBooksResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllAvailableBooksResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllBooksAvailableByBookNameAndAuthor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bookName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="author" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllBooksAvailableByBookNameAndAuthorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllBooksAvailableByBookNameAndAuthorResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllBorrowedBooks">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllBorrowedBooksResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllBorrowedBooksResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllBorrowedBooksWithUser">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllBorrowedBooksWithUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllBorrowedBooksWithUserResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBooksBorrowedViewByName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bookName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBooksBorrowedViewByNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBooksBorrowedViewByNameResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertBorrowBook">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="isbn" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertBorrowBookResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InsertBorrowBookResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllBorrowedBooksByUserId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllBorrowedBooksByUserIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllBorrowedBooksByUserIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReturnBorrowBook">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="bid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="returnDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReturnBorrowBookResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ReturnBorrowBookResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllBooksReservedView">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllBooksReservedViewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllBooksReservedViewResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllBooksReservedViewByUserId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllBooksReservedViewByUserIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllBooksReservedViewByUserIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllBooksBorrowedWithUserView">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllBooksBorrowedWithUserViewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllBooksBorrowedWithUserViewResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllBooksBorrowedWithUserViewByUserId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllBooksBorrowedWithUserViewByUserIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllBooksBorrowedWithUserViewByUserIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteBook">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="isbn" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteBookResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteBookResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertBook">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="isbn" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="bookName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="author" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="category" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="language" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="publishYear" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pages" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="publisher" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertBookResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InsertBookResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateBook">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="updatedIsbn" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="bookName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="author" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="category" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="language" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="publishYear" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pages" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="publisher" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="isbn" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateBookResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateBookResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetAllBooksViewSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllBooksView" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBooksViewSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllBooksViewResponse" />
+  </wsdl:message>
+  <wsdl:message name="BookSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:BookSearch" />
+  </wsdl:message>
+  <wsdl:message name="BookSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:BookSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="insertBookReservedSoapIn">
+    <wsdl:part name="parameters" element="tns:insertBookReserved" />
+  </wsdl:message>
+  <wsdl:message name="insertBookReservedSoapOut">
+    <wsdl:part name="parameters" element="tns:insertBookReservedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTotalBookReservedByIsbnSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTotalBookReservedByIsbn" />
+  </wsdl:message>
+  <wsdl:message name="GetTotalBookReservedByIsbnSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTotalBookReservedByIsbnResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteBookReservedSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteBookReserved" />
+  </wsdl:message>
+  <wsdl:message name="DeleteBookReservedSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteBookReservedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReservedBooksByUserIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllReservedBooksByUserId" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReservedBooksByUserIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllReservedBooksByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllAvailableBooksSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllAvailableBooks" />
+  </wsdl:message>
+  <wsdl:message name="GetAllAvailableBooksSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllAvailableBooksResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBooksAvailableByBookNameAndAuthorSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllBooksAvailableByBookNameAndAuthor" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBooksAvailableByBookNameAndAuthorSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllBooksAvailableByBookNameAndAuthorResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBorrowedBooksSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllBorrowedBooks" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBorrowedBooksSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllBorrowedBooksResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBorrowedBooksWithUserSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllBorrowedBooksWithUser" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBorrowedBooksWithUserSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllBorrowedBooksWithUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBooksBorrowedViewByNameSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBooksBorrowedViewByName" />
+  </wsdl:message>
+  <wsdl:message name="GetBooksBorrowedViewByNameSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBooksBorrowedViewByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertBorrowBookSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertBorrowBook" />
+  </wsdl:message>
+  <wsdl:message name="InsertBorrowBookSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertBorrowBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBorrowedBooksByUserIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllBorrowedBooksByUserId" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBorrowedBooksByUserIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllBorrowedBooksByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReturnBorrowBookSoapIn">
+    <wsdl:part name="parameters" element="tns:ReturnBorrowBook" />
+  </wsdl:message>
+  <wsdl:message name="ReturnBorrowBookSoapOut">
+    <wsdl:part name="parameters" element="tns:ReturnBorrowBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBooksReservedViewSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllBooksReservedView" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBooksReservedViewSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllBooksReservedViewResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBooksReservedViewByUserIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllBooksReservedViewByUserId" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBooksReservedViewByUserIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllBooksReservedViewByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBooksBorrowedWithUserViewSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllBooksBorrowedWithUserView" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBooksBorrowedWithUserViewSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllBooksBorrowedWithUserViewResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBooksBorrowedWithUserViewByUserIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllBooksBorrowedWithUserViewByUserId" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBooksBorrowedWithUserViewByUserIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllBooksBorrowedWithUserViewByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteBookSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteBook" />
+  </wsdl:message>
+  <wsdl:message name="DeleteBookSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertBookSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertBook" />
+  </wsdl:message>
+  <wsdl:message name="InsertBookSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBookSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateBook" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBookSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateBookResponse" />
+  </wsdl:message>
+  <wsdl:portType name="BookWSSoap">
+    <wsdl:operation name="GetAllBooksView">
+      <wsdl:input message="tns:GetAllBooksViewSoapIn" />
+      <wsdl:output message="tns:GetAllBooksViewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BookSearch">
+      <wsdl:input message="tns:BookSearchSoapIn" />
+      <wsdl:output message="tns:BookSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="insertBookReserved">
+      <wsdl:input message="tns:insertBookReservedSoapIn" />
+      <wsdl:output message="tns:insertBookReservedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalBookReservedByIsbn">
+      <wsdl:input message="tns:GetTotalBookReservedByIsbnSoapIn" />
+      <wsdl:output message="tns:GetTotalBookReservedByIsbnSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBookReserved">
+      <wsdl:input message="tns:DeleteBookReservedSoapIn" />
+      <wsdl:output message="tns:DeleteBookReservedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReservedBooksByUserId">
+      <wsdl:input message="tns:GetAllReservedBooksByUserIdSoapIn" />
+      <wsdl:output message="tns:GetAllReservedBooksByUserIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAvailableBooks">
+      <wsdl:input message="tns:GetAllAvailableBooksSoapIn" />
+      <wsdl:output message="tns:GetAllAvailableBooksSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBooksAvailableByBookNameAndAuthor">
+      <wsdl:input message="tns:GetAllBooksAvailableByBookNameAndAuthorSoapIn" />
+      <wsdl:output message="tns:GetAllBooksAvailableByBookNameAndAuthorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBorrowedBooks">
+      <wsdl:input message="tns:GetAllBorrowedBooksSoapIn" />
+      <wsdl:output message="tns:GetAllBorrowedBooksSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBorrowedBooksWithUser">
+      <wsdl:input message="tns:GetAllBorrowedBooksWithUserSoapIn" />
+      <wsdl:output message="tns:GetAllBorrowedBooksWithUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBooksBorrowedViewByName">
+      <wsdl:input message="tns:GetBooksBorrowedViewByNameSoapIn" />
+      <wsdl:output message="tns:GetBooksBorrowedViewByNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertBorrowBook">
+      <wsdl:input message="tns:InsertBorrowBookSoapIn" />
+      <wsdl:output message="tns:InsertBorrowBookSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBorrowedBooksByUserId">
+      <wsdl:input message="tns:GetAllBorrowedBooksByUserIdSoapIn" />
+      <wsdl:output message="tns:GetAllBorrowedBooksByUserIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReturnBorrowBook">
+      <wsdl:input message="tns:ReturnBorrowBookSoapIn" />
+      <wsdl:output message="tns:ReturnBorrowBookSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBooksReservedView">
+      <wsdl:input message="tns:GetAllBooksReservedViewSoapIn" />
+      <wsdl:output message="tns:GetAllBooksReservedViewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBooksReservedViewByUserId">
+      <wsdl:input message="tns:GetAllBooksReservedViewByUserIdSoapIn" />
+      <wsdl:output message="tns:GetAllBooksReservedViewByUserIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBooksBorrowedWithUserView">
+      <wsdl:input message="tns:GetAllBooksBorrowedWithUserViewSoapIn" />
+      <wsdl:output message="tns:GetAllBooksBorrowedWithUserViewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBooksBorrowedWithUserViewByUserId">
+      <wsdl:input message="tns:GetAllBooksBorrowedWithUserViewByUserIdSoapIn" />
+      <wsdl:output message="tns:GetAllBooksBorrowedWithUserViewByUserIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBook">
+      <wsdl:input message="tns:DeleteBookSoapIn" />
+      <wsdl:output message="tns:DeleteBookSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertBook">
+      <wsdl:input message="tns:InsertBookSoapIn" />
+      <wsdl:output message="tns:InsertBookSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBook">
+      <wsdl:input message="tns:UpdateBookSoapIn" />
+      <wsdl:output message="tns:UpdateBookSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BookWSSoap" type="tns:BookWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllBooksView">
+      <soap:operation soapAction="http://tempuri.org/GetAllBooksView" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BookSearch">
+      <soap:operation soapAction="http://tempuri.org/BookSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertBookReserved">
+      <soap:operation soapAction="http://tempuri.org/insertBookReserved" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalBookReservedByIsbn">
+      <soap:operation soapAction="http://tempuri.org/GetTotalBookReservedByIsbn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBookReserved">
+      <soap:operation soapAction="http://tempuri.org/DeleteBookReserved" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReservedBooksByUserId">
+      <soap:operation soapAction="http://tempuri.org/GetAllReservedBooksByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAvailableBooks">
+      <soap:operation soapAction="http://tempuri.org/GetAllAvailableBooks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBooksAvailableByBookNameAndAuthor">
+      <soap:operation soapAction="http://tempuri.org/GetAllBooksAvailableByBookNameAndAuthor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBorrowedBooks">
+      <soap:operation soapAction="http://tempuri.org/GetAllBorrowedBooks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBorrowedBooksWithUser">
+      <soap:operation soapAction="http://tempuri.org/GetAllBorrowedBooksWithUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBooksBorrowedViewByName">
+      <soap:operation soapAction="http://tempuri.org/GetBooksBorrowedViewByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertBorrowBook">
+      <soap:operation soapAction="http://tempuri.org/InsertBorrowBook" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBorrowedBooksByUserId">
+      <soap:operation soapAction="http://tempuri.org/GetAllBorrowedBooksByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnBorrowBook">
+      <soap:operation soapAction="http://tempuri.org/ReturnBorrowBook" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBooksReservedView">
+      <soap:operation soapAction="http://tempuri.org/GetAllBooksReservedView" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBooksReservedViewByUserId">
+      <soap:operation soapAction="http://tempuri.org/GetAllBooksReservedViewByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBooksBorrowedWithUserView">
+      <soap:operation soapAction="http://tempuri.org/GetAllBooksBorrowedWithUserView" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBooksBorrowedWithUserViewByUserId">
+      <soap:operation soapAction="http://tempuri.org/GetAllBooksBorrowedWithUserViewByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBook">
+      <soap:operation soapAction="http://tempuri.org/DeleteBook" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertBook">
+      <soap:operation soapAction="http://tempuri.org/InsertBook" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBook">
+      <soap:operation soapAction="http://tempuri.org/UpdateBook" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BookWSSoap12" type="tns:BookWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllBooksView">
+      <soap12:operation soapAction="http://tempuri.org/GetAllBooksView" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BookSearch">
+      <soap12:operation soapAction="http://tempuri.org/BookSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertBookReserved">
+      <soap12:operation soapAction="http://tempuri.org/insertBookReserved" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalBookReservedByIsbn">
+      <soap12:operation soapAction="http://tempuri.org/GetTotalBookReservedByIsbn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBookReserved">
+      <soap12:operation soapAction="http://tempuri.org/DeleteBookReserved" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReservedBooksByUserId">
+      <soap12:operation soapAction="http://tempuri.org/GetAllReservedBooksByUserId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAvailableBooks">
+      <soap12:operation soapAction="http://tempuri.org/GetAllAvailableBooks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBooksAvailableByBookNameAndAuthor">
+      <soap12:operation soapAction="http://tempuri.org/GetAllBooksAvailableByBookNameAndAuthor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBorrowedBooks">
+      <soap12:operation soapAction="http://tempuri.org/GetAllBorrowedBooks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBorrowedBooksWithUser">
+      <soap12:operation soapAction="http://tempuri.org/GetAllBorrowedBooksWithUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBooksBorrowedViewByName">
+      <soap12:operation soapAction="http://tempuri.org/GetBooksBorrowedViewByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertBorrowBook">
+      <soap12:operation soapAction="http://tempuri.org/InsertBorrowBook" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBorrowedBooksByUserId">
+      <soap12:operation soapAction="http://tempuri.org/GetAllBorrowedBooksByUserId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnBorrowBook">
+      <soap12:operation soapAction="http://tempuri.org/ReturnBorrowBook" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBooksReservedView">
+      <soap12:operation soapAction="http://tempuri.org/GetAllBooksReservedView" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBooksReservedViewByUserId">
+      <soap12:operation soapAction="http://tempuri.org/GetAllBooksReservedViewByUserId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBooksBorrowedWithUserView">
+      <soap12:operation soapAction="http://tempuri.org/GetAllBooksBorrowedWithUserView" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBooksBorrowedWithUserViewByUserId">
+      <soap12:operation soapAction="http://tempuri.org/GetAllBooksBorrowedWithUserViewByUserId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBook">
+      <soap12:operation soapAction="http://tempuri.org/DeleteBook" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertBook">
+      <soap12:operation soapAction="http://tempuri.org/InsertBook" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBook">
+      <soap12:operation soapAction="http://tempuri.org/UpdateBook" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BookWS">
+    <wsdl:port name="BookWSSoap" binding="tns:BookWSSoap">
+      <soap:address location="http://localhost/BookWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BookWSSoap12" binding="tns:BookWSSoap12">
+      <soap12:address location="http://localhost/BookWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

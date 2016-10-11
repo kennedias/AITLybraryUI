@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using BusinessLogic;
+using System.Web.Services.Protocols;
 using SystemFramework;
 
 namespace AITLibrary
@@ -26,13 +26,13 @@ namespace AITLibrary
                 labelSystemMessage.ForeColor = System.Drawing.Color.Black;
                 dataGridViewBooks.DataSource = null;
 
-                BookLogic bookLogic = new BookLogic();
-                dataGridViewBooks.DataSource = bookLogic.GetAllBorrowedBooksWithUser();
+                BookWSIntegration.BookWS bookWS = new BookWSIntegration.BookWS();
+                dataGridViewBooks.DataSource = bookWS.GetAllBorrowedBooksWithUser();
                 dataGridViewBooks.Columns[Constants.fieldBorrowId].Visible = false;
                 dataGridViewBooks.Columns[Constants.fieldLatefee].Visible = false;
                 dataGridViewBooks.Columns[Constants.fieldUserId].Visible = false;
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());
@@ -60,12 +60,12 @@ namespace AITLibrary
                 labelSystemMessage.ForeColor = System.Drawing.Color.Black;
                 dataGridViewBooks.DataSource = null;
 
-                BookLogic bookLogic = new BookLogic();
-                dataGridViewBooks.DataSource = bookLogic.GetAllBooksReservedView();
+                BookWSIntegration.BookWS bookWS = new BookWSIntegration.BookWS();
+                dataGridViewBooks.DataSource = bookWS.GetAllBooksReservedView();
                 dataGridViewBooks.Columns[Constants.fieldReserveId].Visible = false;
                 dataGridViewBooks.Columns[Constants.fieldUserId].Visible = false;
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());

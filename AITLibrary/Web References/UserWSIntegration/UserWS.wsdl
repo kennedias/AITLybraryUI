@@ -2,6 +2,44 @@
 <wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetAllUser">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllUserResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUsersByName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUsersByNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUsersByNameResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="UserLogin">
         <s:complexType>
           <s:sequence>
@@ -24,20 +62,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="UserList">
-        <s:complexType />
-      </s:element>
-      <s:element name="UserListResponse">
+      <s:element name="updateUser">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="UserListResult">
-              <s:complexType>
-                <s:sequence>
-                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
-                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userLevelDescription" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="userID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="updateUserResult" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -56,19 +94,89 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="updateUserWithoutPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userLevelDescription" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="userID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateUserWithoutPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="updateUserWithoutPasswordResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="deleteUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="deleteUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="deleteUserResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getUserLevelDescriptionByLevelCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userLevelCode" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getUserLevelDescriptionByLevelCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getUserLevelDescriptionByLevelCodeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getUserLevelCodeByLevelDescription">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userLevelDescription" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getUserLevelCodeByLevelDescriptionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="getUserLevelCodeByLevelDescriptionResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
+  <wsdl:message name="GetAllUserSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllUser" />
+  </wsdl:message>
+  <wsdl:message name="GetAllUserSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUsersByNameSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUsersByName" />
+  </wsdl:message>
+  <wsdl:message name="GetUsersByNameSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUsersByNameResponse" />
+  </wsdl:message>
   <wsdl:message name="UserLoginSoapIn">
     <wsdl:part name="parameters" element="tns:UserLogin" />
   </wsdl:message>
   <wsdl:message name="UserLoginSoapOut">
     <wsdl:part name="parameters" element="tns:UserLoginResponse" />
   </wsdl:message>
-  <wsdl:message name="UserListSoapIn">
-    <wsdl:part name="parameters" element="tns:UserList" />
+  <wsdl:message name="updateUserSoapIn">
+    <wsdl:part name="parameters" element="tns:updateUser" />
   </wsdl:message>
-  <wsdl:message name="UserListSoapOut">
-    <wsdl:part name="parameters" element="tns:UserListResponse" />
+  <wsdl:message name="updateUserSoapOut">
+    <wsdl:part name="parameters" element="tns:updateUserResponse" />
   </wsdl:message>
   <wsdl:message name="InsertUserSoapIn">
     <wsdl:part name="parameters" element="tns:InsertUser" />
@@ -76,22 +184,88 @@
   <wsdl:message name="InsertUserSoapOut">
     <wsdl:part name="parameters" element="tns:InsertUserResponse" />
   </wsdl:message>
+  <wsdl:message name="updateUserWithoutPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:updateUserWithoutPassword" />
+  </wsdl:message>
+  <wsdl:message name="updateUserWithoutPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:updateUserWithoutPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteUserSoapIn">
+    <wsdl:part name="parameters" element="tns:deleteUser" />
+  </wsdl:message>
+  <wsdl:message name="deleteUserSoapOut">
+    <wsdl:part name="parameters" element="tns:deleteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="getUserLevelDescriptionByLevelCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:getUserLevelDescriptionByLevelCode" />
+  </wsdl:message>
+  <wsdl:message name="getUserLevelDescriptionByLevelCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:getUserLevelDescriptionByLevelCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="getUserLevelCodeByLevelDescriptionSoapIn">
+    <wsdl:part name="parameters" element="tns:getUserLevelCodeByLevelDescription" />
+  </wsdl:message>
+  <wsdl:message name="getUserLevelCodeByLevelDescriptionSoapOut">
+    <wsdl:part name="parameters" element="tns:getUserLevelCodeByLevelDescriptionResponse" />
+  </wsdl:message>
   <wsdl:portType name="UserWSSoap">
+    <wsdl:operation name="GetAllUser">
+      <wsdl:input message="tns:GetAllUserSoapIn" />
+      <wsdl:output message="tns:GetAllUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsersByName">
+      <wsdl:input message="tns:GetUsersByNameSoapIn" />
+      <wsdl:output message="tns:GetUsersByNameSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="UserLogin">
       <wsdl:input message="tns:UserLoginSoapIn" />
       <wsdl:output message="tns:UserLoginSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="UserList">
-      <wsdl:input message="tns:UserListSoapIn" />
-      <wsdl:output message="tns:UserListSoapOut" />
+    <wsdl:operation name="updateUser">
+      <wsdl:input message="tns:updateUserSoapIn" />
+      <wsdl:output message="tns:updateUserSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="InsertUser">
       <wsdl:input message="tns:InsertUserSoapIn" />
       <wsdl:output message="tns:InsertUserSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="updateUserWithoutPassword">
+      <wsdl:input message="tns:updateUserWithoutPasswordSoapIn" />
+      <wsdl:output message="tns:updateUserWithoutPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteUser">
+      <wsdl:input message="tns:deleteUserSoapIn" />
+      <wsdl:output message="tns:deleteUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getUserLevelDescriptionByLevelCode">
+      <wsdl:input message="tns:getUserLevelDescriptionByLevelCodeSoapIn" />
+      <wsdl:output message="tns:getUserLevelDescriptionByLevelCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getUserLevelCodeByLevelDescription">
+      <wsdl:input message="tns:getUserLevelCodeByLevelDescriptionSoapIn" />
+      <wsdl:output message="tns:getUserLevelCodeByLevelDescriptionSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="UserWSSoap" type="tns:UserWSSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllUser">
+      <soap:operation soapAction="http://tempuri.org/GetAllUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsersByName">
+      <soap:operation soapAction="http://tempuri.org/GetUsersByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="UserLogin">
       <soap:operation soapAction="http://tempuri.org/UserLogin" style="document" />
       <wsdl:input>
@@ -101,8 +275,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="UserList">
-      <soap:operation soapAction="http://tempuri.org/UserList" style="document" />
+    <wsdl:operation name="updateUser">
+      <soap:operation soapAction="http://tempuri.org/updateUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -119,9 +293,63 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="updateUserWithoutPassword">
+      <soap:operation soapAction="http://tempuri.org/updateUserWithoutPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteUser">
+      <soap:operation soapAction="http://tempuri.org/deleteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserLevelDescriptionByLevelCode">
+      <soap:operation soapAction="http://tempuri.org/getUserLevelDescriptionByLevelCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserLevelCodeByLevelDescription">
+      <soap:operation soapAction="http://tempuri.org/getUserLevelCodeByLevelDescription" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="UserWSSoap12" type="tns:UserWSSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllUser">
+      <soap12:operation soapAction="http://tempuri.org/GetAllUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsersByName">
+      <soap12:operation soapAction="http://tempuri.org/GetUsersByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="UserLogin">
       <soap12:operation soapAction="http://tempuri.org/UserLogin" style="document" />
       <wsdl:input>
@@ -131,8 +359,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="UserList">
-      <soap12:operation soapAction="http://tempuri.org/UserList" style="document" />
+    <wsdl:operation name="updateUser">
+      <soap12:operation soapAction="http://tempuri.org/updateUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -142,6 +370,42 @@
     </wsdl:operation>
     <wsdl:operation name="InsertUser">
       <soap12:operation soapAction="http://tempuri.org/InsertUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateUserWithoutPassword">
+      <soap12:operation soapAction="http://tempuri.org/updateUserWithoutPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteUser">
+      <soap12:operation soapAction="http://tempuri.org/deleteUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserLevelDescriptionByLevelCode">
+      <soap12:operation soapAction="http://tempuri.org/getUserLevelDescriptionByLevelCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserLevelCodeByLevelDescription">
+      <soap12:operation soapAction="http://tempuri.org/getUserLevelCodeByLevelDescription" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

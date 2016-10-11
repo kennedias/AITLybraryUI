@@ -15,7 +15,7 @@ namespace AITLibrary
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TesteWSForm());
+            Application.Run(new LoginForm());
         }
     }
 }

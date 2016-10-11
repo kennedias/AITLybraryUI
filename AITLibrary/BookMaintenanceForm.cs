@@ -6,8 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using BusinessLogic;
 using SystemFramework;
+using System.Web.Services.Protocols;
 
 namespace AITLibrary
 {
@@ -18,24 +18,24 @@ namespace AITLibrary
             InitializeComponent();
         }
 
-
-
         private void BookMaintenanceForm_Load(object sender, EventArgs e)
         {
             try
             {
-                MasterLogic masterLogic = new MasterLogic();
-                comboBoxAuthor.DataSource = masterLogic.GetAllAuthors();
-                comboBoxAuthor.DisplayMember = "Description";
-                comboBoxAuthor.ValueMember = "ID";
+                AuthorWSIntegration.AuthorWS authorWs = new AuthorWSIntegration.AuthorWS();
+                comboBoxAuthor.DataSource = authorWs.GetAllAuthors();
+                comboBoxAuthor.DisplayMember = Constants.fieldDescription;
+                comboBoxAuthor.ValueMember = Constants.fieldID;
 
-                comboBoxCategory.DataSource = masterLogic.GetAllCategories();
-                comboBoxCategory.DisplayMember = "Description";
-                comboBoxCategory.ValueMember = "ID";
+                CategoryWSIntegration.CategoryWS categoryWs = new CategoryWSIntegration.CategoryWS();
+                comboBoxCategory.DataSource = categoryWs.GetAllCategories();
+                comboBoxCategory.DisplayMember = Constants.fieldDescription;
+                comboBoxCategory.ValueMember = Constants.fieldID;
 
-                comboBoxLanguage.DataSource = masterLogic.GetAllLanguages();
-                comboBoxLanguage.DisplayMember = "Description";
-                comboBoxLanguage.ValueMember = "ID";
+                LanguageWSIntegration.LanguageWS languageWs = new LanguageWSIntegration.LanguageWS();
+                comboBoxLanguage.DataSource = languageWs.GetAllLanguages();
+                comboBoxLanguage.DisplayMember = Constants.fieldDescription;
+                comboBoxLanguage.ValueMember = Constants.fieldID;
 
                 this.disableComboBoxes();
                 this.disableFieldsOfMaintenance();
@@ -44,7 +44,7 @@ namespace AITLibrary
 
 
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());
@@ -83,8 +83,8 @@ namespace AITLibrary
                 else 
                 {
                     labelSystemMessage.Text = null;
-                    BookLogic bookLogic = new BookLogic();
-                    dataGridViewListBooks.DataSource = bookLogic.BookSearch(textBoxISBNSearch.Text, textBoxBookNameSearch.Text, null);
+                    BookWSIntegration.BookWS bookWS = new BookWSIntegration.BookWS();
+                    dataGridViewListBooks.DataSource = bookWS.BookSearch(textBoxISBNSearch.Text, textBoxBookNameSearch.Text, null);
 
                     if (dataGridViewListBooks.RowCount == 0)
                     {
@@ -93,7 +93,7 @@ namespace AITLibrary
                     }
                 }
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());
@@ -307,10 +307,10 @@ namespace AITLibrary
 
                 if (validationOfFieldsToPerformManutention())
                 {
-                    BookLogic BookLogic = new BookLogic();
+                    BookWSIntegration.BookWS bookWS = new BookWSIntegration.BookWS();
                     if (radioInsert.Checked)
-                    {                        
-                        resultOperation = BookLogic.InsertBook(textBoxISBNMaintenace.Text, textBoxNameMaintenance.Text, 
+                    {
+                        resultOperation = bookWS.InsertBook(textBoxISBNMaintenace.Text, textBoxNameMaintenance.Text, 
                                                                (int)comboBoxAuthor.SelectedValue,
                                                                (int)comboBoxCategory.SelectedValue, (int)comboBoxLanguage.SelectedValue,
                                                                Int32.Parse(textBoxYear.Text), Int32.Parse(textBoxPages.Text), textBoxPublisher.Text);
@@ -320,7 +320,7 @@ namespace AITLibrary
                         int isbnColumnIndex = (int)AppEnum.ViewBookModel.Isbn;
                         String isbn = dataGridViewListBooks.SelectedRows[0].Cells[isbnColumnIndex].Value.ToString();
                         String updatedIsbn = textBoxISBNMaintenace.Text;
-                        resultOperation = BookLogic.UpdateBook(updatedIsbn, textBoxNameMaintenance.Text, 
+                        resultOperation = bookWS.UpdateBook(updatedIsbn, textBoxNameMaintenance.Text, 
                                                                (int)comboBoxAuthor.SelectedValue,(int)comboBoxCategory.SelectedValue, 
                                                                (int)comboBoxLanguage.SelectedValue, Int32.Parse(textBoxYear.Text),
                                                                Int32.Parse(textBoxPages.Text), textBoxPublisher.Text, isbn);
@@ -330,7 +330,7 @@ namespace AITLibrary
                            int isbnColumnIndex = (int)AppEnum.ViewBookModel.Isbn;
                            String isbn = dataGridViewListBooks.SelectedRows[0].Cells[isbnColumnIndex].Value.ToString();
 
-                           resultOperation = BookLogic.DeleteBook(isbn);
+                           resultOperation = bookWS.DeleteBook(isbn);
                     }
 
                     if (resultOperation == 0)
@@ -342,17 +342,17 @@ namespace AITLibrary
                     {
                         labelSystemMessage.Text = Constants.msgOperationCompleted;
                         this.BookMaintenanceForm_Load(sender, e);
-                        //   dataGridViewListUsers.DataSource = null;
+                        dataGridViewListBooks.DataSource = null;
                     }
                 }
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());
                 Console.WriteLine(ex.GetBaseException().ToString());
                 labelSystemMessage.ForeColor = System.Drawing.Color.Red;
-                labelSystemMessage.Text = Constants.msgErrorBusinessToUser + ex.Message;
+                labelSystemMessage.Text = Constants.msgErrorBusinessToUser + ex.GetBaseException().Message;
             }
             catch (Exception ex)
             {

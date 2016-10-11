@@ -6,7 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
+using System.Web.Services.Protocols;
+using SystemFramework;
 
 namespace AITLibrary
 {
@@ -25,12 +26,12 @@ namespace AITLibrary
                 radioUpdate.Checked = false;
                 radioDelete.Checked = false;
                 comboBoxUserLevel.Enabled = false;
-                UserLogic userLogic = new UserLogic();
-                dataGridViewListUsers.DataSource = userLogic.GetAllUser();
+                UserWSIntegration.UserWS userWS = new UserWSIntegration.UserWS();
+                dataGridViewListUsers.DataSource = userWS.GetAllUser();
                 dataGridViewListUsers.Columns[Constants.fieldID].Visible = false;
                 dataGridViewListUsers.Columns[Constants.fieldLevelCode].Visible = false;
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());
@@ -64,9 +65,9 @@ namespace AITLibrary
                 }
                 else
                 {
-                    UserLogic userLogic = new UserLogic();
+                    UserWSIntegration.UserWS userWS = new UserWSIntegration.UserWS();
 
-                    dataGridViewListUsers.DataSource = userLogic.GetUsersByName(textBoxNameForSearch.Text);
+                    dataGridViewListUsers.DataSource = userWS.GetUsersByName(textBoxNameForSearch.Text);
                     dataGridViewListUsers.Columns[Constants.fieldID].Visible = false;
                     dataGridViewListUsers.Columns[Constants.fieldLevelCode].Visible = false;
 
@@ -78,7 +79,7 @@ namespace AITLibrary
 
                 }
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());
@@ -154,8 +155,8 @@ namespace AITLibrary
                     else
                     {
                         int resultOperation = 0;
-                        UserLogic userLogic = new UserLogic();
-                        resultOperation = userLogic.insertUser(textBoxName.Text, comboBoxUserLevel.Text);
+                        UserWSIntegration.UserWS userWS = new UserWSIntegration.UserWS();
+                        resultOperation = userWS.InsertUser(textBoxName.Text, comboBoxUserLevel.Text);
 
                         if (resultOperation == 0)
                         {
@@ -181,11 +182,11 @@ namespace AITLibrary
                     else
                     {
                         int resultOperation = 0;
-                        UserLogic userLogic = new UserLogic();
+                        UserWSIntegration.UserWS userWS = new UserWSIntegration.UserWS();
                         int iDColumnIndex = (int)AppEnum.TabUserModel.ID;
                         int informationID = (int)dataGridViewListUsers.SelectedRows[0].Cells[iDColumnIndex].Value;
 
-                        resultOperation = userLogic.updateUserWithoutPassword(textBoxName.Text, comboBoxUserLevel.Text, informationID);
+                        resultOperation = userWS.updateUserWithoutPassword(textBoxName.Text, comboBoxUserLevel.Text, informationID);
 
                         if (resultOperation == 0)
                         {
@@ -212,11 +213,11 @@ namespace AITLibrary
                     else
                     {
                         int resultOperation = 0;
-                        UserLogic userLogic = new UserLogic();
+                        UserWSIntegration.UserWS userWS = new UserWSIntegration.UserWS();
                         int iDColumnIndex = (int)AppEnum.TabUserModel.ID;
                         int informationID = (int)dataGridViewListUsers.SelectedRows[0].Cells[iDColumnIndex].Value;
 
-                        resultOperation = userLogic.deleteUser(informationID);
+                        resultOperation = userWS.deleteUser(informationID);
 
                         if (resultOperation == 0)
                         {
@@ -236,7 +237,7 @@ namespace AITLibrary
                     labelSystemMessage.Text = Constants.msgSelectRecord;
                 }
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());

@@ -6,8 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using BusinessLogic;
 using SystemFramework;
+using System.Web.Services.Protocols;
 
 namespace AITLibrary
 {
@@ -26,8 +26,8 @@ namespace AITLibrary
             textBoxBookName.Text = null;
             textBoxAuthor.Text = null;
 
-            BookLogic bookLogic = new BookLogic();
-            dataGridViewListBooks.DataSource = bookLogic.GetAllBooksView();
+            BookWSIntegration.BookWS bookWS = new BookWSIntegration.BookWS();
+            dataGridViewListBooks.DataSource = bookWS.GetAllBooksView();
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
@@ -42,8 +42,8 @@ namespace AITLibrary
             }
             else
             {
-                BookLogic bookLogic = new BookLogic();
-                dataGridViewListBooks.DataSource = bookLogic.BookSearch(textBoxISBN.Text, textBoxBookName.Text, textBoxAuthor.Text);
+                BookWSIntegration.BookWS bookWS = new BookWSIntegration.BookWS();
+                dataGridViewListBooks.DataSource = bookWS.BookSearch(textBoxISBN.Text, textBoxBookName.Text, textBoxAuthor.Text);
 
                 if (dataGridViewListBooks.RowCount == 0)
                 {
@@ -75,8 +75,8 @@ namespace AITLibrary
                     String isbn = dataGridViewListBooks.SelectedRows[0].Cells[(int)AppEnum.ViewBookModel.Isbn].Value.ToString();
                     labelSystemMessage.Text = isbn;
 
-                    BookLogic bookLogic = new BookLogic();
-                    int resultOperation = bookLogic.insertBookReserved(staticUserID, isbn, DateTime.Today.ToString());
+                    BookWSIntegration.BookWS bookWS = new BookWSIntegration.BookWS();
+                    int resultOperation = bookWS.insertBookReserved(staticUserID, isbn, DateTime.Today.ToString());
                     if (resultOperation == 0)
                     {
                         labelSystemMessage.ForeColor = System.Drawing.Color.Red;
@@ -95,7 +95,7 @@ namespace AITLibrary
                     labelSystemMessage.Text = Constants.msgSelectRecord;
                 }
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());

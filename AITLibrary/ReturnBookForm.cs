@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using BusinessLogic;
+using System.Web.Services.Protocols;
 using SystemFramework;
 
 namespace AITLibrary
@@ -32,8 +32,8 @@ namespace AITLibrary
                 }
                 else
                 {
-                    BookLogic bookLogic = new BookLogic();
-                    dataGridViewBooksBorrowed.DataSource = bookLogic.GetBooksBorrowedViewByName(textBoxBookName.Text);
+                    BookWSIntegration.BookWS bookWS = new BookWSIntegration.BookWS();
+                    dataGridViewBooksBorrowed.DataSource = bookWS.GetBooksBorrowedViewByName(textBoxBookName.Text);
                     dataGridViewBooksBorrowed.Columns[Constants.fieldUserId].Visible = false;
                     dataGridViewBooksBorrowed.Columns[Constants.fieldBorrowId].Visible = false;
                     dataGridViewBooksBorrowed.Columns[Constants.fieldLatefee].Visible = false; 
@@ -46,7 +46,7 @@ namespace AITLibrary
                 }
 
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());
@@ -71,8 +71,8 @@ namespace AITLibrary
             {
                 textBoxBookName.Text = null;
                 labelSystemMessage.Text = null;
-                BookLogic bookLogic = new BookLogic();
-                dataGridViewBooksBorrowed.DataSource = bookLogic.GetAllBooksBorrowedWithUserView();
+                BookWSIntegration.BookWS bookWS = new BookWSIntegration.BookWS();
+                dataGridViewBooksBorrowed.DataSource = bookWS.GetAllBooksBorrowedWithUserView();
                 dataGridViewBooksBorrowed.Columns[Constants.fieldUserId].Visible = false;
                 dataGridViewBooksBorrowed.Columns[Constants.fieldBorrowId].Visible = false;
                 dataGridViewBooksBorrowed.Columns[Constants.fieldLatefee].Visible = false; 
@@ -83,7 +83,7 @@ namespace AITLibrary
                     labelSystemMessage.Text = Constants.msgNoMatchesFound;
                 }
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());
@@ -116,8 +116,8 @@ namespace AITLibrary
                     int bid = (int)dataGridViewBooksBorrowed.SelectedRows[0].Cells[bidColumnIndex].Value;
                     String returnDate = dataGridViewBooksBorrowed.SelectedRows[0].Cells[returnDateColumnIndex].Value.ToString();
 
-                    BookLogic bookLogic = new BookLogic();                    
-                    int resultOperation = bookLogic.ReturnBorrowBook(bid, returnDate);
+                    BookWSIntegration.BookWS bookWS = new BookWSIntegration.BookWS();
+                    int resultOperation = bookWS.ReturnBorrowBook(bid, returnDate);
 
                     if (resultOperation == 0)
                     {
@@ -138,7 +138,7 @@ namespace AITLibrary
                 }
 
             }
-            catch (BusinessLogicException ex)
+            catch (SoapException ex)
             {
                 //Error log simulate
                 Console.WriteLine(ex.ToString());
